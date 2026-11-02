@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>異文化理解：ドイツ語圏の国々と文化 完全攻略ナビ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* ユーザー指定の重要赤文字・解答カードスタイル */
+        .quiz-correct-answer {
+            color: #dc2626 !important;
+            font-weight: 800 !important;
+            font-size: 1.125rem !important;
+            background-color: #fee2e2 !important;
+            padding: 0.75rem 1rem !important;
+            border-radius: 0.5rem !important;
+            border-left: 6px solid #dc2626 !important;
+            box-shadow: 0 2px 4px rgba(220, 38, 38, 0.1);
+        }
+
+        .highlight-keyword {
+            background: linear-gradient(transparent 60%, #fef08a 60%);
+            font-weight: bold;
+        }
+
+        .red-highlight-keyword {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header & Navigation -->
+    <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">🇩🇪</span>
+                    <div>
+                        <h1 class="font-bold text-lg leading-tight sm:text-xl">異文化理解 <span class="text-amber-400 text-sm sm:text-base font-normal">| ドイツ語圏の国々と文化</span></h1>
+                        <p class="text-xs text-slate-400">講義要点 & 小テスト（全46問）完全マスターアプリ</p>
+                    </div>
+                </div>
+
+                <!-- Global Stats -->
+                <div class="hidden md:flex items-center space-x-4 bg-slate-800 py-1.5 px-3 rounded-lg text-xs">
+                    <div>
+                        <span class="text-slate-400">総問題数:</span>
+                        <span class="font-bold text-amber-400 ml-1">46問</span>
+                    </div>
+                    <div class="h-4 w-px bg-slate-700"></div>
+                    <div>
+                        <span class="text-slate-400">解答済み:</span>
+                        <span id="global-answered-count" class="font-bold text-emerald-400 ml-1">0</span>/46
+                    </div>
+                    <div class="h-4 w-px bg-slate-700"></div>
+                    <div>
+                        <span class="text-slate-400">正解率:</span>
+                        <span id="global-accuracy" class="font-bold text-cyan-400 ml-1">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation Bar -->
+            <nav class="flex space-x-1 overflow-x-auto pb-2 scrollbar-none text-xs sm:text-sm font-medium border-t border-slate-800 pt-2">
+                <button onclick="switchTab('tab3')" id="nav-tab3" class="nav-btn px-3 py-2 rounded-md whitespace-nowrap transition-all flex items-center space-x-1.5 bg-amber-500 text-slate-950 font-bold shadow">
+                    <span>第3回：国々</span>
+                    <span class="bg-slate-900 text-amber-400 text-xs px-1.5 py-0.5 rounded-full">13問</span>
+                </button>
+                <button onclick="switchTab('tab4')" id="nav-tab4" class="nav-btn px-3 py-2 rounded-md whitespace-nowrap transition-all flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <span>第4回：あれこれ</span>
+                    <span class="bg-slate-800 text-slate-300 text-xs px-1.5 py-0.5 rounded-full">10問</span>
+                </button>
+                <button onclick="switchTab('tab5')" id="nav-tab5" class="nav-btn px-3 py-2 rounded-md whitespace-nowrap transition-all flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <span>第5回：料理</span>
+                    <span class="bg-slate-800 text-slate-300 text-xs px-1.5 py-0.5 rounded-full">11問</span>
+                </button>
+                <button onclick="switchTab('tab6')" id="nav-tab6" class="nav-btn px-3 py-2 rounded-md whitespace-nowrap transition-all flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                    <span>第6回：お菓子</span>
+                    <span class="bg-slate-800 text-slate-300 text-xs px-1.5 py-0.5 rounded-full">12問</span>
+                </button>
+                <button onclick="switchTab('tabAll')" id="nav-tabAll" class="nav-btn px-3 py-2 rounded-md whitespace-nowrap transition-all flex items-center space-x-1.5 text-rose-300 hover:text-white hover:bg-rose-950/50 border border-rose-800/50">
+                    <i class="fa-solid fa-trophy text-amber-400"></i>
+                    <span>全回総合テスト</span>
+                    <span class="bg-rose-900/80 text-rose-200 text-xs px-1.5 py-0.5 rounded-full">46問</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- Mode Sub-bar & Section Switcher -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div id="section-header-info">
+                <h2 id="current-title" class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>第3回：ドイツ語圏の国々</span>
+                </h2>
+                <p id="current-subtitle" class="text-xs text-slate-500 mt-1">ドイツ、オーストリア、スイスの基礎データ・地理・歴史・政治・重要人物まとめ</p>
+            </div>
+
+            <!-- View Switcher (Notes vs Quiz) -->
+            <div id="sub-mode-controls" class="flex items-center bg-slate-100 p-1 rounded-lg self-start md:self-auto text-xs sm:text-sm">
+                <button onclick="setSubView('notes')" id="btn-sub-notes" class="px-3 py-1.5 rounded-md font-semibold transition-all bg-white text-slate-900 shadow-sm flex items-center gap-1.5">
+                    <i class="fa-solid fa-book-open text-blue-600"></i>
+                    <span>講義要点ノート</span>
+                </button>
+                <button onclick="setSubView('quiz')" id="btn-sub-quiz" class="px-3 py-1.5 rounded-md font-semibold transition-all text-slate-600 hover:text-slate-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-pen-to-square text-rose-600"></i>
+                    <span>小テスト演習 <span id="sub-quiz-badge" class="bg-rose-100 text-rose-700 text-xs px-1.5 py-0.5 rounded-full font-bold ml-1">一番重要!</span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- SEARCH BAR FOR NOTES (Only visible in Notes view) -->
+        <div id="notes-search-container" class="mb-6">
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="notes-search-input" onkeyup="filterNotes()" placeholder="要点ノートをキーワード検索 (例: ベルリン, レシート, シュニッツェル, 1919, メルツ...)" 
+                    class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 shadow-sm">
+            </div>
+        </div>
+
+        <!-- ==================== SECTION: LECTURE NOTES CONTAINER ==================== -->
+        <div id="notes-view" class="space-y-6">
+            <!-- Dynamic Content loaded via JS for active lesson -->
+        </div>
+
+        <!-- ==================== SECTION: QUIZ CONTAINER ==================== -->
+        <div id="quiz-view" class="hidden space-y-6">
+
+            <!-- Quiz Controls Header Card -->
+            <div class="bg-gradient-to-r from-slate-900 via-rose-950 to-slate-900 text-white rounded-xl p-5 shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-rose-900/40">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-rose-600 text-white font-bold text-xs px-2.5 py-1 rounded-full uppercase tracking-wider">小テスト演習モード</span>
+                        <span class="text-rose-200 text-xs">何度でも再挑戦可能！情報抜け絶対なし</span>
+                    </div>
+                    <h3 class="text-lg font-bold mt-1 text-white">設問リスト（解答＆赤文字解説付き）</h3>
+                    <p class="text-xs text-rose-200/80 mt-0.5">※全問に解答チェック・一括答え合わせ機能が備わっています。</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                    <button onclick="gradeAllCurrentView()" class="flex-1 md:flex-none px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-lg text-xs sm:text-sm shadow transition flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-check-double"></i>
+                        <span>全問答え合わせ (一括表示)</span>
+                    </button>
+                    <button onclick="resetCurrentQuiz()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-lg text-xs sm:text-sm border border-slate-700 transition flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>リセット</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Score & Filter Bar -->
+            <div class="flex flex-col sm:flex-row items-center justify-between bg-white p-3.5 rounded-xl border border-slate-200 text-xs sm:text-sm gap-3">
+                <div class="flex items-center space-x-4">
+                    <div>
+                        <span class="text-slate-500">進捗:</span>
+                        <span id="quiz-progress-text" class="font-bold text-slate-800 ml-1">0 / 0</span>
+                    </div>
+                    <div class="h-4 w-px bg-slate-300"></div>
+                    <div>
+                        <span class="text-slate-500">スコア:</span>
+                        <span id="quiz-score-text" class="font-bold text-rose-600 ml-1">0点</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <span class="text-slate-500">絞り込み:</span>
+                    <button onclick="filterQuizQuestions('all')" id="qfilter-all" class="px-2.5 py-1 rounded bg-slate-800 text-white font-semibold">すべて</button>
+                    <button onclick="filterQuizQuestions('unanswered')" id="qfilter-unanswered" class="px-2.5 py-1 rounded bg-slate-100 text-slate-700 hover:bg-slate-200">未回答</button>
+                    <button onclick="filterQuizQuestions('incorrect')" id="qfilter-incorrect" class="px-2.5 py-1 rounded bg-slate-100 text-slate-700 hover:bg-slate-200">間違えた問題</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Quiz Questions List -->
+            <div id="quiz-questions-list" class="space-y-4">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 mt-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p class="font-medium text-slate-300">大学講義「異文化理解：ドイツ語圏の国々と文化」学習＆小テスト完全マスターWebアプリ</p>
+            <p class="text-slate-500">※本サイトは講義スライド・小テスト問題・参考動画を完全に反映した学習支援ツールです。</p>
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // DATA STRUCTURE: Comprehensive summaries & Complete Quiz Questions (No Omissions!)
+        const COURSE_DATA = {
+            tab3: {
+                id: 'tab3',
+                title: '第3回：ドイツ語圏の国々',
+                subtitle: 'ドイツ、オーストリア、スイスの基礎データ・地理・歴史・政治・著名人完全まとめ',
+                notes: [
+                    {
+                        category: '🇩🇪 ドイツ連邦共和国 (Bundesrepublik Deutschland)',
+                        items: [
+                            { title: '正式名称 & 国旗', content: '正式名称：<span class="highlight-keyword">ドイツ連邦共和国</span>。国旗の色は上から順に<span class="red-highlight-keyword">「黒・赤・金（ゴールド）」</span>。' },
+                            { title: '東西分裂と統合の歴史', content: '1949年から1990年までドイツは東西に分裂していた。西ドイツ＝<span class="highlight-keyword">ドイツ連邦共和国</span>、東ドイツ＝<span class="highlight-keyword">ドイツ民主共和国</span>。1990年に西ドイツが東ドイツを吸収統合する形で統一した。' },
+                            { title: '首都の変遷', content: '現在の首都は<span class="highlight-keyword">ベルリン</span>。東西分裂時、西ドイツの首都は<span class="highlight-keyword">ボン</span>、東ドイツの首都は<span class="highlight-keyword">東ベルリン</span>であった。' },
+                            { title: '国土面積と人口', content: '国土面積：約<span class="red-highlight-keyword">36万km²</span>（日本の約<span class="red-highlight-keyword">94%</span>の広さ）。人口：約<span class="red-highlight-keyword">8350万人</span>（2025年、日本の約<span class="red-highlight-keyword">70%</span>）。' },
+                            { title: '政治・政府首脳', content: '国家元首：<span class="highlight-keyword">フランク＝ヴァルター・シュタインマイヤー</span>連邦大統領（儀礼的・形式的権限のみ）。行政政府の長（連邦首相）：<span class="red-highlight-keyword">フリードリヒ・メルツ</span>首相（キリスト教民主同盟所属）。前首相：オーラフ・ショルツ、アンゲラ・メルケル（16年間執政）。' },
+                            { title: '存命著名人', content: 'ウルズラ・フォン・デア・ライエン（欧州委員会委員長）、ミハエル・シューマッハ（元F1）、ハイディ・クルム（モデル）、ダイアン・クルーガー（女優）、Zedd（DJ/ミュージシャン）、木村昴（声優・俳優）。' }
+                        ]
+                    },
+                    {
+                        category: '🇦🇹 オーストリア共和国 (Republik Österreich)',
+                        items: [
+                            { title: '正式名称 & 地理位置', content: '正式名称：<span class="highlight-keyword">オーストリア共和国</span>。ドイツの<span class="red-highlight-keyword">「南東」</span>に位置する隣国（オセアニアのオーストラリアとは別の国）。' },
+                            { title: '首都 & ハプスブルク家', content: '首都：<span class="red-highlight-keyword">ウィーン</span>。かつて神聖ローマ帝国やオーストリア＝ハンガリー帝国の首都であり、長らく<span class="highlight-keyword">ハプスブルク家</span>の統治下にあった。' },
+                            { title: '国土面積・人口・国旗', content: '面積：約<span class="highlight-keyword">8万km²</span>（北海道とほぼ同じ）。人口：約<span class="highlight-keyword">922万人</span>（神奈川県と同程度）。国旗：<span class="highlight-keyword">赤・白・赤</span>。公用語：<span class="highlight-keyword">ドイツ語</span>（標準ドイツ語とアクセントや語彙の違いあり）。' },
+                            { title: '歴史的著名人', content: 'オーストリア女大公<span class="highlight-keyword">マリア・テレジア</span>。その娘マリア・アントーニアはフランス王ルイ16世に嫁ぎ、<span class="red-highlight-keyword">マリー・アントワネット</span>として知られる。皇后エリーザベト（シシィ）。' },
+                            { title: '政治 & 現代著名人', content: '国家元首：アレクサンダー・ファン・デア・ベレン連邦大統領。行政政府の長：<span class="red-highlight-keyword">クリスティアン・シュトッカー</span>首相（2024-2025年選出）。著名人：<span class="highlight-keyword">アーノルド・シュワルツネッガー</span>（俳優・元州知事）。' }
+                        ]
+                    },
+                    {
+                        category: '🇨🇭 スイス連邦 (Schweizerische Eidgenossenschaft)',
+                        items: [
+                            { title: '特徴・首都・通貨', content: 'ドイツの南に位置する<span class="highlight-keyword">永世中立国</span>。首都：<span class="red-highlight-keyword">ベルン</span>（最大都市はチューリヒ）。通貨：<span class="red-highlight-keyword">スイス・フラン</span>。' },
+                            { title: '公用語（4つの言語）', content: '<span class="red-highlight-keyword">ドイツ語（64%）、フランス語（20%）、イタリア語（6%）、ロマンシュ語（0.5%）</span>の4つ。' },
+                            { title: '国旗と赤十字', content: '国旗は赤地に白十字。<span class="red-highlight-keyword">赤十字（赤十字社）の旗</span>は、スイスの国旗の配色を逆（白地に赤十字）にしたものである。' },
+                            { title: '面積・人口・著名人', content: '面積：約<span class="highlight-keyword">4万km²</span>（オーストリアや北海道の半分）。人口：約<span class="highlight-keyword">912万人</span>。行政の長：連邦参事会（2026年大統領：ギー・パルムラン）。著名人：ロジャー・フェデラー、スタン・ワウリンカ、ステファン・ランビエール。' }
+                        ]
+                    }
+                ],
+                quizzes: [
+                    { id: 'q3_1', type: 'mcq', q: '現在のドイツの正式名称を選んでください。', options: ['ドイツ民主共和国', 'ドイツ連邦共和国'], correct: 1, exp: '【解説】1990年の東西統一後も西ドイツの名称であった「ドイツ連邦共和国」がそのまま正式名称となっています。' },
+                    { id: 'q3_2', type: 'mcq', q: '現在のドイツの国土面積は日本の（______）%程度の広さである。', options: ['124', '104', '94', '74', '54'], correct: 2, exp: '【解説】ドイツの面積は約36万km²で、日本の約94%の広さです。' },
+                    { id: 'q3_3', type: 'mcq', q: '現在のドイツの人口は、日本の人口の（______）%程度である。', options: ['30', '50', '70', '90', '120'], correct: 2, exp: '【解説】ドイツの人口は約8350万人（2025年）で、日本の人口（約1.23億人）の約70%です。' },
+                    { id: 'q3_4', type: 'fill', q: '現在のドイツの国旗の色は上から順に、黒・赤・[ 穴埋め ]である。', correct: ['金', 'ゴールド', 'gold'], exp: '【解説】ドイツ国旗は上から順に「黒・赤・金」です。' },
+                    { id: 'q3_5', type: 'mcq', q: 'オーストリアはドイツの（______）に位置するヨーロッパの国で、オーストラリアとは別の国である。', options: ['北西', '北東', '南西', '南東'], correct: 3, exp: '【解説】オーストリアはドイツの「南東」に隣接する中欧の国です。' },
+                    { id: 'q3_6', type: 'fill', q: 'オーストリアの首都は[ 穴埋め ]である。', correct: ['ウィーン', 'Wien', 'vienna'], exp: '【解説】オーストリアの首都はウィーンです。ハプスブルク家の都として栄えました。' },
+                    { id: 'q3_7', type: 'mcq', q: 'オーストリアの歴史上の人物で著名なのはオーストリア女大公マリア・テレジアであるが、彼女の娘であるマリア・アントーニアは一般には（______）として知られている。', options: ['マリー・キュリー', 'マリー・アントワネット', 'マリー・ド・メディシス', 'マリー・ジョゼフィーヌ・ド・サヴォワ', 'マリー・テレーズ・ドートリッシュ'], correct: 1, exp: '【解説】マリア・テレジアの15番目の子（十一女）マリア・アントーニアは、フランスに嫁ぎマリー・アントワネットと呼ばれました。' },
+                    { id: 'q3_8', type: 'fill', q: 'スイスの公用語はドイツ語の他、フランス語、[ 穴埋め ]、ロマンシュ語である。', correct: ['イタリア語', 'イタリア'], exp: '【解説】スイスの公用語4つ：ドイツ語(64%)、フランス語(20%)、イタリア語(6%)、ロマンシュ語(0.5%)。' },
+                    { id: 'q3_9', type: 'fill', q: 'スイスの首都は[ 穴埋め ]である。', correct: ['ベルン', 'Bern'], exp: '【解説】スイスの首都はベルンです（最大都市はチューリヒ）。' },
+                    { id: 'q3_10', type: 'mcq', q: 'スイスの通貨は（______）である。', options: ['ユーロ', 'スイス・ドル', 'スイス・マルク', 'スイス・フラン', 'スイス・リラ'], correct: 3, exp: '【解説】スイスはEU非加盟であり、独自通貨「スイス・フラン」を使用します。' },
+                    { id: 'q3_11', type: 'fill', q: '[ 穴埋め ]の旗は、スイスの旗の配色を逆にしたものである。', correct: ['赤十字', '赤十字社', '赤十字の旗'], exp: '【解説】赤十字国際委員会創設者デュナンの母国スイスに敬意を表し、スイス国旗（赤地に白十字）の配色を反転（白地に赤十字）させたものが赤十字旗です。' },
+                    { id: 'q3_12', type: 'mcq', q: '現在のドイツの行政政府の長は（______）である。', options: ['アレクサンダー・ファン・デア・ベレン', 'ギー・パルムラン', 'クリスティアン・シュトッカー', 'アンゲラ・メルケル', 'フリードリヒ・メルツ'], correct: 4, exp: '【解説】講義資料における現在のドイツ首相（行政政府の長）はフリードリヒ・メルツです。' },
+                    { id: 'q3_13', type: 'mcq', q: '現在のオーストリアの行政政府の長は（______）である。', options: ['アレクサンダー・ファン・デア・ベレン', 'ギー・パルムラン', 'クリスティアン・シュトッカー', 'アンゲラ・メルケル', 'フリードリヒ・メルツ'], correct: 2, exp: '【解説】講義資料における現在のオーストリア首相（行政政府の長）はクリスティアン・シュトッカーです。' }
+                ]
+            },
+
+            tab4: {
+                id: 'tab4',
+                title: '第4回：ドイツあれこれ',
+                subtitle: 'ドイツの習慣、生活、マナー、行事、教育・社会制度完全まとめ',
+                notes: [
+                    {
+                        category: '🎉 誕生日・行事・マナー',
+                        items: [
+                            { title: '誕生日の禁止事項', content: '誕生日が「来る前」にお祝いを言うのは不吉（誕生日が来るまで生きられなくなるという迷信）とされており、<span class="red-highlight-keyword">絶対に事前にお祝いを言わない</span>。' },
+                            { title: 'パーティ招待のマナー', content: '自宅での誕生日パーティ等に招かれた場合、指定された時間よりも<span class="red-highlight-keyword">15分遅れて行く</span>のがマナー（主人の最終準備時間を持たせるため）。' },
+                            { title: 'プレゼントとレシート', content: 'プレゼントを渡す際、<span class="highlight-keyword">購入した時のレシートを添える</span>。サイズや色が合わない場合に受け取った人が交換・返品できるようにするため。' },
+                            { title: 'クリスマスとアドヴェント', content: 'クリスマスは家族行事（店やレストランは休業）。<span class="red-highlight-keyword">11月30日に最も近い日曜日</span>から「アドヴェント（待降節）」が始まり、4本のろうそくに順に火を灯す。大晦日・正月は恋人や友人と過ごし花火を打ち上げる。' }
+                        ]
+                    },
+                    {
+                        category: '🍺 オクトーバーフェスト & 民族衣装',
+                        items: [
+                            { title: 'オクトーバーフェスト', content: 'ミュンヘンで開催。10月の<span class="red-highlight-keyword">第1日曜日</span>を最終日として16日間開催（実際は9月から開催）。ビール1人前のサイズは<span class="highlight-keyword">1.0リットル（Mass）</span>。' },
+                            { title: '民族衣装（トラハト）', content: '女性用：<span class="red-highlight-keyword">ディアンドル (Dirndl)</span>。男性用：<span class="red-highlight-keyword">レーダーホーゼ (Lederhosen)</span>。南ドイツの結婚式では正装やドレスコードとして着用される。' }
+                        ]
+                    },
+                    {
+                        category: '🍷 飲酒・結婚・教育・社会',
+                        items: [
+                            { title: '飲酒可能年齢', content: '<span class="highlight-keyword">14歳</span>（保護者同伴でビール・ワイン可）、<span class="highlight-keyword">16歳</span>（単独でビール・ワイン可）、<span class="highlight-keyword">18歳</span>（全アルコール可）。' },
+                            { title: '結婚式と指輪', content: '前日に「ポルターアーベント」として白い皿等の陶器を割り魔除けにし新郎新婦が掃除する。結婚指輪は<span class="red-highlight-keyword">「右手の薬指」</span>に着用する（婚約指輪は左手）。' },
+                            { title: '教育と進路選択', content: '<span class="red-highlight-keyword">小学4年生（10歳頃）</span>に進学か職業訓練かの大まかな進路を決定する。' },
+                            { title: '大学の制度と学費', content: '大学の学費は<span class="red-highlight-keyword">「基本的に無料」</span>。個別入試はなく高校卒業資格試験（アビトゥア）点で合否。事務手数料で地域公共交通機関が無料になる「ゼメスターチケット」がもらえる。' },
+                            { title: '買い物・生活・鉄道規則', content: '日曜日営業禁止（店舗休業法）。ペットボトルや瓶はデポジット制（Pfand 20-40セント）。乾杯時は<span class="highlight-keyword">相手の目を見る</span>（見ないと7年間良い愛の契りに恵まれない）。公衆トイレは有料（0.5〜1ユーロ）。人前で鼻をすするのはNG（ティッシュで噛む）。電車・バスには<span class="red-highlight-keyword">「改札がない」</span>（私服検査員が巡回、無札は60ユーロ以上の罰金）。' }
+                        ]
+                    }
+                ],
+                quizzes: [
+                    { id: 'q4_1', type: 'mcq', q: '誕生日に際して、ドイツでは絶対にやらないことは？', options: ['誕生日にお祝いを言う（※誕生日が来る前に言うこと）', '誕生日を過ぎてからお祝いを言う'], correct: 0, exp: '【解説】ドイツでは「誕生日が来る前にお祝いを言う」のは不吉とされるため、絶対にやりません。' },
+                    { id: 'q4_2', type: 'mcq', q: 'ドイツでは家に招かれた場合には、指定された時間の（______）に到着するのがマナーである。', options: ['30分前', '15分前', 'ちょうど', '15分後', '30分後'], correct: 3, exp: '【解説】準備の最終確認の時間を与えるため、15分ほど遅れて到着するのがマナーとされています。' },
+                    { id: 'q4_3', type: 'mcq', q: 'オクトーバーフェストは10月の（______）日曜日を最終日として開催される。', options: ['第1', '第2', '第3', '第4', '最終'], correct: 0, exp: '【解説】10月の「第1日曜日」を最終日とし、そこからさかのぼって16日間開催されます。' },
+                    { id: 'q4_4', type: 'mcq', q: '南ドイツの女性用民族衣装のことを（______）と呼ぶ。', options: ['レーダーホーゼ', 'ディアンドル', 'キンドル', 'キンダー'], correct: 1, exp: '【解説】女性用の民族衣装は「ディアンドル (Dirndl)」です。' },
+                    { id: 'q4_5', type: 'mcq', q: '南ドイツの男性用民族衣装のことを（______）と呼ぶ。', options: ['レーダーホーゼ', 'ディアンドル', 'キンドル', 'キンダー'], correct: 0, exp: '【解説】男性用のレザー製革ズボン民族衣装は「レーダーホーゼ (Lederhosen)」です。' },
+                    { id: 'q4_6', type: 'mcq', q: 'ドイツでは結婚指輪は（______）に着用する。', options: ['左手の薬指', '右手の薬指', '左手の人差し指', '右手の人差し指', '両手の親指'], correct: 1, exp: '【解説】ドイツでは結婚指輪は「右手の薬指」に着用します。（婚約指輪は左手）。' },
+                    { id: 'q4_7', type: 'mcq', q: 'ドイツでは（______）頃に大学に進学するかどうかおおまかな進路を決定する。', options: ['高校1年生', '中学3年生', '中学1年生', '小学6年生', '小学4年生'], correct: 4, exp: '【解説】ドイツでは「小学4年生」終了時に大学進学ルート（ギムナジウム等）か職業訓練ルートかが分岐します。' },
+                    { id: 'q4_8', type: 'mcq', q: 'ドイツの大学の学費は（______）である。', options: ['年間約1億円', '年間約500万円', '年間約100万円', '基本的に無料'], correct: 3, exp: '【解説】ドイツの公立大学の学費は「基本的に無料」です（毎学期数万円の事務手数料のみ）。' },
+                    { id: 'q4_9', type: 'mcq', q: 'アドヴェントは（______）から始まる。', options: ['11月の第一日曜日', '11月30日に最も近い日曜日', '11月30日', '冬至', '12月1日'], correct: 1, exp: '【解説】アドヴェント（待降節）は「11月30日に最も近い日曜日」から始まります。' },
+                    { id: 'q4_10', type: 'mcq', q: 'ドイツの都市鉄道の特徴としてもっとも相応しいものをひとつ選んでください。', options: ['無料で利用できる', '地下鉄しかない', '改札がない', 'すべての車両にトイレがついている', 'すべて全自動運転である'], correct: 2, exp: '【解説】ドイツの駅には日本のような「改札がない」のが特徴です（乗車券は打刻機で有効化し私服検札員がチェック）。' }
+                ]
+            },
+
+            tab5: {
+                id: 'tab5',
+                title: '第5回：ドイツ語圏の料理',
+                subtitle: '伝統料理、ソーセージ、ファーストフード、ドリンク、レストランマナー完全まとめ',
+                notes: [
+                    {
+                        category: '🌭 ファーストフード & ソーセージ類',
+                        items: [
+                            { title: 'カリーヴルスト (Currywurst)', content: '<span class="red-highlight-keyword">焼いたソーセージにケチャップとカレー粉をかけたもの</span>。ベルリンやハンブルクが発祥。' },
+                            { title: 'シュヴァイネメット (Schweinemett)', content: '生の<span class="red-highlight-keyword">豚肉（ひき肉）</span>に香辛料を混ぜてパンに乗せる料理。※日本では寄生虫の危険があるため<span class="red-highlight-keyword">絶対に真似をしてはならない</span>。' },
+                            { title: 'ソーセージの名称', content: '<span class="highlight-keyword">ブラートヴルスト</span>（焼きソーセージ）。フランクフルト＝フランクフルト風ソーセージ。ウィンナー＝<span class="red-highlight-keyword">ウィーン風ソーセージ</span>のこと。' },
+                            { title: 'ヴァイスヴルスト (Weisswurst)', content: '仔牛肉を使った白ソーセージ。伝統的には<span class="red-highlight-keyword">「朝食」</span>として食べられていた（鮮度が命のため）。' }
+                        ]
+                    },
+                    {
+                        category: '🥩 伝統的肉・魚・野菜料理',
+                        items: [
+                            { title: 'シュニッツェル (Schnitzel)', content: '薄くのばした肉のカツレツ。ウィーン風シュニッツェルは<span class="red-highlight-keyword">「仔牛肉」</span>で作る。' },
+                            { title: 'ターフェルシュピッツ (Tafelspitz)', content: '<span class="red-highlight-keyword">オーストリア</span>の伝統的な牛肉煮込み料理。庶民の食べ物とされるが比較的高価。' },
+                            { title: 'シュパーゲル (Spargel)', content: 'ドイツの春の風物詩である<span class="red-highlight-keyword">「白アスパラガス」</span>。オランデーズソース等で食べる。' },
+                            { title: 'ラプスカウス (Labskaus)', content: '北ドイツの<span class="red-highlight-keyword">「船乗り」</span>料理。ジャガイモとコンビーフを潰して混ぜた料理（目玉焼き等添え）。' },
+                            { title: 'その他の名物料理', content: 'ドゥネル・ケバブ（トルコ移民によるケバブ）、マウルタッシェン（ドイツ風餃子）、シュペッツレ（ドイツ風パスタ）、アイスバイン（豚足塩煮）、ザウアーグラウト（キャベツ酢漬け）。' }
+                        ]
+                    },
+                    {
+                        category: '🍺 ドリンク & レストランマナー',
+                        items: [
+                            { title: 'アプフェルショーレ (Apfelschorle)', content: '<span class="red-highlight-keyword">リンゴジュース</span>を炭酸水で割った人気飲料。' },
+                            { title: 'ラドラー (Radler)', content: '<span class="red-highlight-keyword">ビール</span>をレモネード（スプライト等）類で割ったカクテル風飲料。' },
+                            { title: 'レストランマナー & チップ', content: 'お冷は出ない（有料の炭酸水等が普通）。テーブル担当が決まっている。チップは会計額の約<span class="red-highlight-keyword">「5〜10%」</span>が目安（端数を切り上げて支払う）。' }
+                        ]
+                    }
+                ],
+                quizzes: [
+                    { id: 'q5_1', type: 'mcq', q: 'カリーヴルストとは（______）である。', options: ['豚足を煮たもの', '豚足のグリル', '焼いたソーセージにケチャップとカレー粉をかけたもの', 'フライドポテトのこと'], correct: 2, exp: '【解説】カリーヴルストは焼いたソーセージを切り、ケチャップとカレー粉をかけた国民的B級グルメです。' },
+                    { id: 'q5_2', type: 'mcq', q: 'シュヴァイネメットとは生の（______）に香辛料等をまぜたものである。日本では絶対に真似をしてはならない。', options: ['鶏肉', '牛肉', '豚肉', '羊肉', '魚'], correct: 2, exp: '【解説】シュヴァイネメットは生の「豚肉」です。日本の豚肉は生食用に処理されていないため絶対に真似不可です。' },
+                    { id: 'q5_3', type: 'mcq', q: 'シュニッツェルとはカツレツのことだが、ウィーン風シュニッツェルは（______）で作られたものを言う。', options: ['若鶏肉', '仔牛肉', '子豚肉', '仔羊肉', '新鮮な魚'], correct: 1, exp: '【解説】「ウィーン風シュニッツェル (Wiener Schnitzel)」は伝統的に「仔牛肉」を使用することが定められています。' },
+                    { id: 'q5_4', type: 'mcq', q: 'ターフェルシュピッツとは（______）の伝統料理で、庶民の食べ物とされるが比較的高価である。', options: ['北ドイツ', 'スイス', 'オーストリア', 'オーストラリア'], correct: 2, exp: '【解説】ターフェルシュピッツはオーストリア・ウィーンの名物牛肉煮込み料理です。' },
+                    { id: 'q5_5', type: 'mcq', q: 'ドイツの春の風物詩シュパーゲルとは（______）のことである。', options: ['白アスパラガス', 'イチゴ', 'ジャガイモ', 'ハム', 'キノコ'], correct: 0, exp: '【解説】シュパーゲル (Spargel) は春の味覚「白アスパラガス」のことです。' },
+                    { id: 'q5_6', type: 'mcq', q: 'ラプスカウスとは北ドイツの（______）料理である。', options: ['猟師', '船乗り', '農民', '貴族', '王侯'], correct: 1, exp: '【解説】ラプスカウスは長期間航海する「船乗り」たちが食べた伝統料理です。' },
+                    { id: 'q5_7', type: 'mcq', q: 'ウィンナーとは（______）のことを意味する。', options: ['ソーセージ一般のこと', '白いソーセージのこと', 'ウィーン風ソーセージのこと', '南ドイツ風ソーセージのこと', '北ドイツ風ソーセージのこと'], correct: 2, exp: '【解説】ウィンナー（Wiener）は「ウィーン風の」という意味です。' },
+                    { id: 'q5_8', type: 'mcq', q: 'ヴァイスヴルストは仔牛肉の肉を使ったもので、伝統的には（______）として食べられていたものである。', options: ['朝食', '昼食', '夕食', '夜食'], correct: 0, exp: '【解説】傷みやすいため、昔は「午前中（朝食）」に食べるのが伝統でした。' },
+                    { id: 'q5_9', type: 'mcq', q: 'アプフェルショーレとは（______）を炭酸水で割ったものである。', options: ['オレンジジュース', 'グレープジュース', 'リンゴジュース', 'グアバジュース'], correct: 2, exp: '【解説】Apfel（リンゴ）＋Schorle（炭酸割）＝「リンゴジュースの炭酸水割り」です。' },
+                    { id: 'q5_10', type: 'mcq', q: 'ラドラーとは（______）をレモネード類で割ったものである。', options: ['珈琲', '紅茶', 'ワイン', 'ビール', 'ウィスキー'], correct: 3, exp: '【解説】ラドラー (Radler) はビールをレモネードで割ったカクテルです。' },
+                    { id: 'q5_11', type: 'mcq', q: 'ドイツのレストランでのチップは、会計額の約（______）％が目安である。', options: ['5〜10', '10〜20', '20〜30', '30〜40'], correct: 0, exp: '【解説】ドイツのレストランでのチップは「5〜10%」程度が相場です。' }
+                ]
+            },
+
+            tab6: {
+                id: 'tab6',
+                title: '第6回：ドイツ文化圏のお菓子',
+                subtitle: '伝統洋菓子、バウムクーヘン史、名物銘菓、HARIBO、醸造史完全まとめ',
+                notes: [
+                    {
+                        category: '🍰 バウムクーヘンと日本',
+                        items: [
+                            { title: 'バウムクーヘンの意味 & 初焼き', content: '「木のケーキ」の意味。日本で最初に焼かれたのは<span class="red-highlight-keyword">1919年</span>。菓子職人カール・ユーハイム (Karl Juchheim) による。' },
+                            { title: '日本初の販売場所', content: '広島県物産陳列館にて販売。この建物は現在、広島の<span class="red-highlight-keyword">「原爆ドーム」</span>として知られている。現在も「ユーハイム」社として営業。' }
+                        ]
+                    },
+                    {
+                        category: '🎂 ドイツ・オーストリアの伝統菓子',
+                        items: [
+                            { title: 'シュヴァルツヴェルダー・キルシュトルテ', content: '「黒い森のさくらんぼケーキ」。<span class="red-highlight-keyword">さくらんぼのリキュール（キルシュヴァッサー）</span>を使用する。' },
+                            { title: 'マルツィパン (Marzipan)', content: '主な原材料は<span class="red-highlight-keyword">「アーモンド」</span>と砂糖。' },
+                            { title: 'スパゲティアイス (Spaghetti-Eis)', content: '<span class="red-highlight-keyword">アイスをスパゲティ状に押し出したもの</span>にイチゴソースをかけたデザート。' },
+                            { title: 'シュネーバル (Schneeball)', content: 'ローテンブルクの名物生菓子で、意味は<span class="red-highlight-keyword">「雪玉」</span>。' },
+                            { title: 'カイザーシュマレン (Kaiserschmarrn)', content: 'オーストリア伝統の<span class="red-highlight-keyword">「パンケーキ」</span>の一種。' },
+                            { title: 'ザッハトルテの逸話', content: 'デメルの職人がレシピを盗み出したという噂が残るが、これは<span class="red-highlight-keyword">「史実ではない」</span>。' },
+                            { title: 'ドイツのクリスマスケーキ', content: '<span class="red-highlight-keyword">「シュトレン」</span>（※表記注意：シュトーレンではなく「シュトレン」）。' }
+                        ]
+                    },
+                    {
+                        category: '🍬 HARIBO & ビール醸造史',
+                        items: [
+                            { title: 'HARIBOの社名の由来', content: '<span class="red-highlight-keyword">創業者の名前と創業の地</span>（Hans Riegel Bonn）の頭文字から。' },
+                            { title: '黒いグミの味', content: 'HARIBOの黒いグミは<span class="red-highlight-keyword">「リコリス（甘草）」</span>の味である。' },
+                            { title: '青島（チンタオ）ビール', content: 'ドイツの租借地であった中国の青島にドイツから技術が伝わり、<span class="red-highlight-keyword">「青島ビール」</span>が製造され現在に伝わっている。' }
+                        ]
+                    }
+                ],
+                quizzes: [
+                    { id: 'q6_1', type: 'mcq', q: 'バウムクーヘンが日本で最初に焼かれたのは（______）年である。', options: ['1899', '1909', '1919', '1929', '1939'], correct: 2, exp: '【解説】1919年3月4日、カール・ユーハイムによって日本で初めてバウムクーヘンが焼かれました。' },
+                    { id: 'q6_2', type: 'fill', q: 'バウムクーヘンが日本で最初に販売された場所は、現在では広島の[ 穴埋め ]として知られている。', correct: ['原爆ドーム', '広島県物産陳列館'], exp: '【解説】展示会会場であった「広島県物産陳列館」は現在の「原爆ドーム」です。' },
+                    { id: 'q6_3', type: 'mcq', q: 'シュヴァルツヴェルダー・キルシュトルテには、キルシュヴァッサーと呼ばれる（______）を使用する。', options: ['チョコレート', '生クリーム', 'さくらんぼ', 'さくらんぼのジュース', 'さくらんぼのリキュール'], correct: 4, exp: '【解説】キルシュヴァッサーは「さくらんぼのリキュール（発酵蒸留酒）」のことです。' },
+                    { id: 'q6_4', type: 'mcq', q: 'マルツィパン（マジパン）の主な原材料は（______）と砂糖である。', options: ['小麦', 'パン', 'ピスタチオ', 'アーモンド', 'カシューナッツ'], correct: 3, exp: '【解説】マルツィパンの主原料は「アーモンド」と砂糖を挽き潰して練ったペーストです。' },
+                    { id: 'q6_5', type: 'mcq', q: 'スパゲティアイスとは（______）である。', options: ['スパゲティにアイスをかけたデザート', '冷製パスタのこと', 'アイスをスパゲティ状に押し出したもの', 'スパゲティを氷づけにしたもの', 'スパゲティを愛しているということ'], correct: 2, exp: '【解説】スパゲティアイスはアイスクリームを麺状に絞り出し、トマトソースに見立てたイチゴソースをかけたデザートです。' },
+                    { id: 'q6_6', type: 'mcq', q: 'シュネーバルとは（______）の意味で、ローテンブルクの名物生菓子である。', options: ['脳みそ', '雪玉', 'お手玉', 'テニスボール', '硬球'], correct: 1, exp: '【解説】Schnee（雪）＋Ball（玉）＝「雪玉」の意味です。' },
+                    { id: 'q6_7', type: 'mcq', q: 'カイザーシュマレンとはオーストリアの伝統菓子で（______）の一種である。', options: ['パンケーキ', 'パン', 'クッキー', '饅頭', 'チーズ'], correct: 0, exp: '【解説】カイザーシュマレンは一口サイズに崩した「パンケーキ」の一種です。' },
+                    { id: 'q6_8', type: 'mcq', q: 'ザッハトルテについては、デメルの職人がホテル・ザッハーからレシピを盗み出したという噂が残るがこれは（______）。', options: ['実話である', '実話ではない'], correct: 1, exp: '【解説】レシピ盗難の伝説はよく語られますが「史実ではない」と解説されています。' },
+                    { id: 'q6_9', type: 'mcq', q: 'グミで知られるHARIBOの社名は（______）が元になっている。', options: ['創業者の父の出身地', '創業者の名前と創業の地', '創業者の妻の名前', 'マスコットの熊の名前'], correct: 1, exp: '【解説】Hans Riegel Bonn（創業者ハンス・リーゲル、創業地ボン）の頭文字をとったものです。' },
+                    { id: 'q6_10', type: 'mcq', q: 'HARIBOの黒いグミは（______）の味である。', options: ['豚の血', 'タイヤ', 'リコリス', 'ミント', 'カモミール'], correct: 2, exp: '【解説】黒いグミは「リコリス（甘草）」味です（タイヤの形をしたグミとして有名）。' },
+                    { id: 'q6_11', type: 'mcq', q: 'ドイツのクリスマスケーキは（______）である。', options: ['シュトーレン', 'シュートレン', 'シュトレーン', 'シュートレーン', 'シュトレン'], correct: 4, exp: '【解説】講義資料で強調されている通り、正しくは「シュトレン (Stollen)」です（伸ばさない）。' },
+                    { id: 'q6_12', type: 'mcq', q: 'ドイツの租借地であった中国の青島ではドイツからその技術が伝えられ、（______）が製造され今に伝わっている。', options: ['青島バウムクーヘン', '青島ソーセージ', '青島ビール', '青島シュトレン', '青島ワイン'], correct: 2, exp: '【解説】ドイツからビール醸造技術が伝わり、現在も有名ブランドとして知られる「青島ビール」が誕生しました。' }
+                ]
+            }
+        };
+
+        // State Management
+        let currentTab = 'tab3';
+        let currentSubView = 'notes'; // 'notes' or 'quiz'
+        let userAnswers = {}; // { questionId: { value: string, isCorrect: boolean, graded: boolean } }
+        let quizFilter = 'all'; // 'all', 'unanswered', 'incorrect'
+
+        // Initialize on DOM Ready
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCurrentState();
+            updateGlobalStats();
+        });
+
+        // Switch Main Lesson Tab
+        function switchTab(tabId) {
+            currentTab = tabId;
+
+            // Update Header Nav Styling
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn px-3 py-2 rounded-md whitespace-nowrap transition-all flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-slate-800";
+            });
+
+            const activeNavBtn = document.getElementById(`nav-${tabId}`);
+            if (tabId === 'tabAll') {
+                activeNavBtn.className = "nav-btn px-3 py-2 rounded-md whitespace-nowrap transition-all flex items-center space-x-1.5 bg-rose-600 text-white font-bold shadow ring-2 ring-rose-400";
+            } else {
+                activeNavBtn.className = "nav-btn px-3 py-2 rounded-md whitespace-nowrap transition-all flex items-center space-x-1.5 bg-amber-500 text-slate-950 font-bold shadow";
+            }
+
+            renderCurrentState();
+        }
+
+        // Switch Sub View (Notes vs Quiz)
+        function setSubView(viewMode) {
+            currentSubView = viewMode;
+
+            const btnNotes = document.getElementById('btn-sub-notes');
+            const btnQuiz = document.getElementById('btn-sub-quiz');
+            const notesView = document.getElementById('notes-view');
+            const quizView = document.getElementById('quiz-view');
+            const searchContainer = document.getElementById('notes-search-container');
+
+            if (viewMode === 'notes') {
+                btnNotes.className = "px-3 py-1.5 rounded-md font-semibold transition-all bg-white text-slate-900 shadow-sm flex items-center gap-1.5";
+                btnQuiz.className = "px-3 py-1.5 rounded-md font-semibold transition-all text-slate-600 hover:text-slate-900 flex items-center gap-1.5";
+                notesView.classList.remove('hidden');
+                quizView.classList.add('hidden');
+                searchContainer.classList.remove('hidden');
+            } else {
+                btnQuiz.className = "px-3 py-1.5 rounded-md font-semibold transition-all bg-rose-600 text-white shadow-sm flex items-center gap-1.5";
+                btnNotes.className = "px-3 py-1.5 rounded-md font-semibold transition-all text-slate-600 hover:text-slate-900 flex items-center gap-1.5";
+                quizView.classList.remove('hidden');
+                notesView.classList.add('hidden');
+                searchContainer.classList.add('hidden');
+            }
+
+            renderCurrentState();
+        }
+
+        // Render Page Content
+        function renderCurrentState() {
+            const titleEl = document.getElementById('current-title');
+            const subtitleEl = document.getElementById('current-subtitle');
+
+            if (currentTab === 'tabAll') {
+                titleEl.innerHTML = `<i class="fa-solid fa-trophy text-amber-500"></i> <span>全回総合マスターモード</span>`;
+                subtitleEl.textContent = '第3回〜第6回の小テスト問題（全46問）をランダム・総復習演習できます';
+            } else {
+                const data = COURSE_DATA[currentTab];
+                titleEl.innerHTML = `<span>${data.title}</span>`;
+                subtitleEl.textContent = data.subtitle;
+            }
+
+            if (currentSubView === 'notes') {
+                renderNotes();
+            } else {
+                renderQuiz();
+            }
+        }
+
+        // Render Lecture Notes
+        function renderNotes() {
+            const container = document.getElementById('notes-view');
+
+            if (currentTab === 'tabAll') {
+                // Show all notes combined
+                let html = '';
+                ['tab3', 'tab4', 'tab5', 'tab6'].forEach(key => {
+                    html += buildNotesHtmlForLesson(COURSE_DATA[key]);
+                });
+                container.innerHTML = html;
+            } else {
+                container.innerHTML = buildNotesHtmlForLesson(COURSE_DATA[currentTab]);
+            }
+        }
+
+        function buildNotesHtmlForLesson(lessonData) {
+            let html = `
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200 flex items-center justify-between">
+                        <span>${lessonData.title}</span>
+                        <span class="text-xs bg-amber-100 text-amber-800 font-semibold px-2.5 py-1 rounded-full">講義要点まとめ</span>
+                    </h3>
+                    <div class="space-y-6">
+            `;
+
+            lessonData.notes.forEach(cat => {
+                html += `
+                    <div class="note-card border border-slate-200 rounded-lg overflow-hidden bg-slate-50/50">
+                        <div class="bg-slate-100 px-4 py-2.5 border-b border-slate-200 font-bold text-sm text-slate-800 flex items-center gap-2">
+                            <span>${cat.category}</span>
+                        </div>
+                        <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                `;
+
+                cat.items.forEach(item => {
+                    html += `
+                        <div class="bg-white p-3.5 rounded-lg border border-slate-200 text-xs sm:text-sm space-y-1 shadow-2xs">
+                            <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-dot text-amber-500 text-xs"></i>
+                                <span>${item.title}</span>
+                            </h4>
+                            <p class="text-slate-700 leading-relaxed">${item.content}</p>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+            `;
+            return html;
+        }
+
+        // Filter Notes Search
+        function filterNotes() {
+            const query = document.getElementById('notes-search-input').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('#notes-view .note-card > div > div');
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Get Current Active Quiz List
+        function getCurrentQuizList() {
+            if (currentTab === 'tabAll') {
+                return [
+                    ...COURSE_DATA.tab3.quizzes,
+                    ...COURSE_DATA.tab4.quizzes,
+                    ...COURSE_DATA.tab5.quizzes,
+                    ...COURSE_DATA.tab6.quizzes
+                ];
+            } else {
+                return COURSE_DATA[currentTab].quizzes;
+            }
+        }
+
+        // Render Quiz Questions
+        function renderQuiz() {
+            const questions = getCurrentQuizList();
+            const listEl = document.getElementById('quiz-questions-list');
+
+            let filteredQuestions = questions.filter(q => {
+                const ansState = userAnswers[q.id];
+                if (quizFilter === 'unanswered') {
+                    return !ansState || !ansState.graded;
+                } else if (quizFilter === 'incorrect') {
+                    return ansState && ansState.graded && !ansState.isCorrect;
+                }
+                return true;
+            });
+
+            if (filteredQuestions.length === 0) {
+                listEl.innerHTML = `
+                    <div class="bg-white rounded-xl p-8 text-center text-slate-500 border border-slate-200 shadow-sm">
+                        <i class="fa-solid fa-circle-check text-4xl text-emerald-500 mb-3"></i>
+                        <p class="font-bold text-slate-800">条件に該当する設問はありません</p>
+                        <p class="text-xs text-slate-400 mt-1">フィルターを変更するか、リセットをお試しください。</p>
+                    </div>
+                `;
+                updateQuizScoreBar(questions);
+                return;
+            }
+
+            let html = '';
+            filteredQuestions.forEach((q, idx) => {
+                const state = userAnswers[q.id] || { value: '', isCorrect: false, graded: false };
+
+                html += `
+                    <div id="card-${q.id}" class="bg-white rounded-xl border ${state.graded ? (state.isCorrect ? 'border-emerald-300 ring-1 ring-emerald-200' : 'border-rose-300 ring-1 ring-rose-200') : 'border-slate-200'} p-5 shadow-sm transition">
+                        <!-- Question Header -->
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="bg-slate-900 text-white font-bold text-xs px-2.5 py-1 rounded-md">Q${idx + 1}</span>
+                                <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">選択必須・要点</span>
+                                ${state.graded ? (state.isCorrect ? 
+                                    `<span class="bg-emerald-100 text-emerald-800 font-bold text-xs px-2 py-0.5 rounded-full flex items-center gap-1"><i class="fa-solid fa-check"></i> 正解</span>` : 
+                                    `<span class="bg-rose-100 text-rose-800 font-bold text-xs px-2 py-0.5 rounded-full flex items-center gap-1"><i class="fa-solid fa-xmark"></i> 不正解</span>`
+                                ) : ''}
+                            </div>
+                        </div>
+
+                        <!-- Question Text -->
+                        <p class="font-bold text-slate-900 text-sm sm:text-base mb-4 leading-relaxed">${q.q}</p>
+
+                        <!-- Answer Input Section -->
+                        <div class="mb-4">
+                `;
+
+                if (q.type === 'mcq') {
+                    html += `<div class="space-y-2">`;
+                    q.options.forEach((opt, oIdx) => {
+                        const isSelected = state.value === String(oIdx);
+                        html += `
+                            <label class="flex items-center p-3 rounded-lg border ${isSelected ? 'border-amber-500 bg-amber-50/50 font-bold' : 'border-slate-200 hover:bg-slate-50'} cursor-pointer text-xs sm:text-sm transition">
+                                <input type="radio" name="q_${q.id}" value="${oIdx}" ${isSelected ? 'checked' : ''} onchange="onRadioChange('${q.id}', '${oIdx}')" class="w-4 h-4 text-amber-600 focus:ring-amber-500">
+                                <span class="ml-2.5 text-slate-800">${oIdx + 1}. ${opt}</span>
+                            </label>
+                        `;
+                    });
+                    html += `</div>`;
+                } else if (q.type === 'fill') {
+                    html += `
+                        <div class="flex items-center gap-2">
+                            <input type="text" id="input_${q.id}" value="${state.value}" oninput="onTextInput('${q.id}', this.value)" placeholder="回答を入力（例: 原爆ドーム）" 
+                                class="flex-1 px-3.5 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-2xs">
+                        </div>
+                    `;
+                }
+
+                html += `
+                        </div>
+
+                        <!-- Individual Question Grading Button -->
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+                            <button onclick="gradeSingleQuestion('${q.id}')" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-md transition shadow-2xs">
+                                判定する
+                            </button>
+
+                            <!-- User Requested HIGHLIGHTED RED ANSWER DISPLAY -->
+                            <div class="text-right">
+                                ${state.graded ? `<span class="text-slate-500">採点済み</span>` : `<span class="text-slate-400">未採点</span>`}
+                            </div>
+                        </div>
+
+                        <!-- RED ANSWER & EXPLANATION BOX (Show when graded) -->
+                        ${state.graded ? `
+                            <div class="mt-4 pt-3 border-t border-slate-200 space-y-2">
+                                <div class="quiz-correct-answer">
+                                    【正解】 ${getCorrectAnswerText(q)}
+                                </div>
+                                <div class="bg-amber-50/80 border border-amber-200/80 rounded-lg p-3 text-xs text-slate-800 leading-relaxed">
+                                    <span class="font-bold text-amber-900 block mb-1">💡 講義解説ノート:</span>
+                                    ${q.exp}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+
+            listEl.innerHTML = html;
+            updateQuizScoreBar(questions);
+        }
+
+        // Get Formatted Correct Answer String
+        function getCorrectAnswerText(q) {
+            if (q.type === 'mcq') {
+                return `${q.correct + 1}. ${q.options[q.correct]}`;
+            } else {
+                return `${q.correct[0]} （同義語可）`;
+            }
+        }
+
+        // Input Handlers
+        function onRadioChange(qId, val) {
+            userAnswers[qId] = userAnswers[qId] || {};
+            userAnswers[qId].value = val;
+            userAnswers[qId].graded = false;
+        }
+
+        function onTextInput(qId, val) {
+            userAnswers[qId] = userAnswers[qId] || {};
+            userAnswers[qId].value = val.trim();
+            userAnswers[qId].graded = false;
+        }
+
+        // Single Question Evaluation
+        function gradeSingleQuestion(qId) {
+            const questions = getCurrentQuizList();
+            const q = questions.find(item => item.id === qId);
+            if (!q) return;
+
+            const state = userAnswers[qId] || { value: '' };
+
+            if (!state.value && state.value !== 0) {
+                alert('回答を選択または入力してください。');
+                return;
+            }
+
+            let isCorrect = false;
+            if (q.type === 'mcq') {
+                isCorrect = parseInt(state.value) === q.correct;
+            } else if (q.type === 'fill') {
+                const userVal = String(state.value).toLowerCase().trim();
+                isCorrect = q.correct.some(ans => userVal.includes(ans.toLowerCase()));
+            }
+
+            userAnswers[qId] = {
+                value: state.value,
+                isCorrect: isCorrect,
+                graded: true
+            };
+
+            renderQuiz();
+            updateGlobalStats();
+        }
+
+        // Grade All Questions / Reveal Answers
+        function gradeAllCurrentView() {
+            const questions = getCurrentQuizList();
+
+            questions.forEach(q => {
+                const state = userAnswers[q.id] || { value: '' };
+                let isCorrect = false;
+
+                if (q.type === 'mcq') {
+                    if (state.value !== undefined && state.value !== '') {
+                        isCorrect = parseInt(state.value) === q.correct;
+                    }
+                } else if (q.type === 'fill') {
+                    if (state.value) {
+                        const userVal = String(state.value).toLowerCase().trim();
+                        isCorrect = q.correct.some(ans => userVal.includes(ans.toLowerCase()));
+                    }
+                }
+
+                userAnswers[q.id] = {
+                    value: state.value || '',
+                    isCorrect: isCorrect,
+                    graded: true
+                };
+            });
+
+            renderQuiz();
+            updateGlobalStats();
+        }
+
+        // Reset Current Quiz
+        function resetCurrentQuiz() {
+            if (confirm('現在の小テスト回答をリセットしますか？')) {
+                const questions = getCurrentQuizList();
+                questions.forEach(q => {
+                    delete userAnswers[q.id];
+                });
+                renderQuiz();
+                updateGlobalStats();
+            }
+        }
+
+        // Filter Quiz List View
+        function filterQuizQuestions(filterType) {
+            quizFilter = filterType;
+            ['all', 'unanswered', 'incorrect'].forEach(f => {
+                const btn = document.getElementById(`qfilter-${f}`);
+                if (f === filterType) {
+                    btn.className = "px-2.5 py-1 rounded bg-slate-800 text-white font-semibold";
+                } else {
+                    btn.className = "px-2.5 py-1 rounded bg-slate-100 text-slate-700 hover:bg-slate-200";
+                }
+            });
+            renderQuiz();
+        }
+
+        // Score Bar Updates
+        function updateQuizScoreBar(questions) {
+            let answered = 0;
+            let correct = 0;
+
+            questions.forEach(q => {
+                const state = userAnswers[q.id];
+                if (state && state.graded) {
+                    answered++;
+                    if (state.isCorrect) correct++;
+                }
+            });
+
+            document.getElementById('quiz-progress-text').textContent = `${answered} / ${questions.length} 問`;
+            document.getElementById('quiz-score-text').textContent = `${correct}正解 (${questions.length > 0 ? Math.round((correct / questions.length) * 100) : 0}%)`;
+        }
+
+        // Update Header Global Stats
+        function updateGlobalStats() {
+            let totalQ = 46;
+            let totalAnswered = 0;
+            let totalCorrect = 0;
+
+            Object.keys(userAnswers).forEach(qId => {
+                const state = userAnswers[qId];
+                if (state && state.graded) {
+                    totalAnswered++;
+                    if (state.isCorrect) totalCorrect++;
+                }
+            });
+
+            document.getElementById('global-answered-count').textContent = totalAnswered;
+            const accuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+            document.getElementById('global-accuracy').textContent = `${accuracy}%`;
+        }
+    </script>
+</body>
+</html>
